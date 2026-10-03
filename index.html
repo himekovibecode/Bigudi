@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Студия красоты Bigudi</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0f0f12;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        /* --- КРАСИВЫЕ АНИМАЦИИ --- */
+        @keyframes headerSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes cardFlipIn {
+            from {
+                opacity: 0;
+                transform: rotateX(-30deg) translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: rotateX(0deg) translateY(0);
+            }
+        }
+
+        @keyframes pulseBorder {
+            0% {
+                border-color: #bb86fc;
+                box-shadow: 0 0 15px rgba(187, 134, 252, 0.3);
+            }
+            50% {
+                border-color: #ff79c6;
+                box-shadow: 0 0 30px rgba(255, 121, 198, 0.6);
+            }
+            100% {
+                border-color: #bb86fc;
+                box-shadow: 0 0 15px rgba(187, 134, 252, 0.3);
+            }
+        }
+
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* --- ШАПКА --- */
+        header {
+            background: linear-gradient(135deg, #181824, #282836);
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 2px solid #2a2a3a;
+            animation: headerSlide 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ffffff, #bb86fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #a0a0b0;
+        }
+
+        /* Плашка с записью */
+        .booking-notice {
+            display: inline-block;
+            margin-top: 15px;
+            background: rgba(187, 134, 252, 0.15);
+            border: 1px solid #bb86fc;
+            color: #d7b4ff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            animation: floatBadge 3s infinite ease-in-out;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- СЕКЦИИ И КАРТОЧКИ С ЭФФЕКТОМ ПЕРЕЛИСТЫВАНИЯ --- */
+        section {
+            background-color: #16161e;
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: cardFlipIn 0.8s ease-out forwards;
+            transform-origin: top center;
+        }
+
+        section:hover {
+            transform: translateY(-8px) rotateX(2deg);
+            box-shadow: 0 15px 35px rgba(187, 134, 252, 0.2);
+            border-color: rgba(187, 134, 252, 0.3);
+        }
+
+        h2 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #bb86fc;
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+
+        /* --- УСЛУГИ --- */
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 12px;
+            border-bottom: 1px dashed #2a2a3a;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .service-item:hover {
+            background-color: rgba(187, 134, 252, 0.08);
+            transform: translateX(8px);
+            padding-left: 18px;
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #bb86fc;
+            font-size: 1.15rem;
+        }
+
+        /* --- АКЦИЯ ПЕНСИОНЕРАМ --- */
+        .pension-promo {
+            background: linear-gradient(135deg, #231933, #16161e);
+            border: 2px solid #bb86fc;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            animation: pulseBorder 4s infinite ease-in-out, cardFlipIn 0.8s ease-out;
+        }
+
+        .pension-promo h3 {
+            color: #ff79c6;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .promo-price {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            font-size: 1.1rem;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px 18px;
+            border-radius: 10px;
+            border-left: 4px solid #ff79c6;
+            transition: transform 0.3s ease;
+        }
+
+        .promo-price:hover {
+            transform: scale(1.02);
+        }
+
+        /* --- КНОПКИ С АНИМАЦИЕЙ --- */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 200px;
+            display: inline-block;
+            background: linear-gradient(135deg, #bb86fc, #9955e8);
+            color: #121212;
+            padding: 16px 24px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 15px rgba(187, 134, 252, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(187, 134, 252, 0.6);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366, #1da851);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp:hover {
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666677;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Студия красоты Bigudi</h1>
+        <p>📍 ул. Гафиатуллина, 23</p>
+        <div class="booking-notice">
+            🗓️ Стрижки и услуги по предварительной записи
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Секция Акция ко Дню пенсионера -->
+        <section class="pension-promo">
+            <h3>👵👴 Акция ко Дню пенсионера</h3>
+            <p>Специальная цена для наших уважаемых клиентов! (По предварительной записи)</p>
+            <div class="promo-price">
+                <span>Мужская стрижка</span>
+                <span class="price" style="color: #ff79c6;">200 ₽</span>
+            </div>
+            <div class="promo-price">
+                <span>Женская стрижка</span>
+                <span class="price" style="color: #ff79c6;">400 ₽</span>
+            </div>
+        </section>
+
+        <!-- Основной прейскурант -->
+        <section id="services">
+            <h2>Услуги и цены</h2>
+            <div class="service-item">
+                <span>Женская стрижка</span>
+                <span class="price">от 800 ₽</span>
+            </div>
+            <div class="service-item">
+                <span>Мужская стрижка</span>
+                <span class="price">от 500 ₽</span>
+            </div>
+            <div class="service-item">
+                <span>Укладка / Прическа</span>
+                <span class="price">от 1000 ₽</span>
+            </div>
+            <div class="service-item">
+                <span>Окрашивание волос</span>
+                <span class="price">от 1500 ₽</span>
+            </div>
+        </section>
+
+        <!-- Контакты и запись -->
+        <section id="contacts">
+            <h2>Предварительная запись</h2>
+            <p style="margin-bottom: 10px;">Ждем вас по адресу: <strong>улица Гафиатуллина, 23</strong></p>
+            <p style="font-size: 1.2rem; margin-bottom: 5px;">
+                Телефон: <strong style="color: #bb86fc;">+7 (960) 081-17-26</strong>
+            </p>
+            <p style="color: #a0a0b0; font-size: 0.95rem;">Пожалуйста, выберите удобную дату и время заранее.</p>
+
+            <div class="btn-group">
+                <a href="tel:+79600811726" class="btn">Позвонить и записаться</a>
+                <a href="https://wa.me/79600811726" class="btn btn-whatsapp" target="_blank">Записаться через WhatsApp</a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        &copy; 2026 Студия красоты Bigudi. Все права защищены.
+    </footer>
+
+</body>
+</html>
